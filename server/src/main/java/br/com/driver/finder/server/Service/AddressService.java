@@ -43,9 +43,8 @@ public class AddressService {
         return addresses.getJSONArray("results").getJSONObject(0);
     }
 
-    private JSONObject reduceAddress(JSONObject json){
+    private JSONObject reduceAddress(JSONObject originalAddress){
         JSONObject reducedAddress = new JSONObject();
-        JSONObject originalAddress = json.getJSONObject("address");
         reducedAddress.put("formattedAddress", originalAddress.get("formatted_address"));
         JSONObject location = originalAddress.getJSONObject("geometry").getJSONObject("location");
         reducedAddress.put("latitude", location.get("lat"));

@@ -5,10 +5,14 @@ import org.json.JSONObject;
 import java.io.IOException;
 
 public class AddressService {
-    private final GoogleApi googleApi;
+    private GoogleApi googleApi;
 
     public AddressService(){
-        this.googleApi = new GoogleApi();
+        try {
+            this.googleApi = new GoogleApi();
+        }catch (IOException e){
+            this.googleApi = null;
+        }
     }
 
     public JSONObject buildAddress(String address){

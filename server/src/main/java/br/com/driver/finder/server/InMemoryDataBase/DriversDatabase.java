@@ -14,7 +14,7 @@ public class DriversDatabase {
         this.drivers = new HashMap<>();
     }
 
-    public static DriversDatabase getDriversDatabase(){
+    public static DriversDatabase instance(){
         if(DriversDatabase.driversDatabase == null){
             DriversDatabase.driversDatabase = new DriversDatabase();
         }

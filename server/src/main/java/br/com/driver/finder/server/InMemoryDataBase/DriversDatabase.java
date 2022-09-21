@@ -1,17 +1,17 @@
 package br.com.driver.finder.server.InMemoryDataBase;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.HashMap;
+import java.util.Map;
 
 public class DriversDatabase {
     private static DriversDatabase driversDatabase;
 
     private int counter;
-    private final List<DriverEntity> drivers;
+    private final Map<Integer, DriverEntity> drivers;
 
     private DriversDatabase(){
         this.counter = 0;
-        this.drivers = new ArrayList<>();
+        this.drivers = new HashMap<>();
     }
 
     public static DriversDatabase getDriversDatabase(){
@@ -23,20 +23,16 @@ public class DriversDatabase {
 
     public DriverEntity addDriver(DriverEntity driver){
         driver.setId(this.counter);
+        this.drivers.put(driver.getId(), driver);
         this.counter++;
-        this.drivers.add(driver);
         return driver;
     }
 
-    public DriverEntity getDriverById(int id){
-        return this.drivers
-                .stream()
-                .filter(driver -> driver.getId() == id)
-                .findFirst()
-                .orElse(null);
+    public DriverEntity getDriverById(Integer id){
+        return this.drivers.get(id);
     }
 
-    public List<DriverEntity> getDrivers() {
-        return drivers;
+    public Map<Integer, DriverEntity> getDrivers() {
+        return this.drivers;
     }
 }

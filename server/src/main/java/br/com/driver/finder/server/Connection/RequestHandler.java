@@ -1,5 +1,7 @@
-package br.com.driver.finder.server.Service;
+package br.com.driver.finder.server.Connection;
 
+import br.com.driver.finder.server.Service.Router;
+import br.com.driver.finder.server.Util.JsonParserSerializer;
 import org.json.JSONObject;
 
 import java.io.*;
@@ -8,7 +10,6 @@ import java.net.Socket;
 public class RequestHandler implements Runnable{
 
     private final Router router;
-
     private final Socket socket;
 
 
@@ -24,9 +25,9 @@ public class RequestHandler implements Runnable{
             DataOutputStream outputStream = new DataOutputStream(this.socket.getOutputStream());
 
             String request = inputBufferedReader.readLine();
-            JSONObject jsonRequest = new JSONObject(request);
-            JSONObject jsonResponse = this.router.route(jsonRequest);
-            outputStream.writeBytes(jsonResponse + "\n");
+            JSONObject jsonRequest = JsonParserSerializer.parseString(request);
+            JSONObject jsonResponse = this.router.callService(jsonRequest);
+            outputStream.writeBytes(JsonParserSerializer.serializeJson(jsonResponse));
             this.socket.close();
         } catch (IOException e) {
             throw new RuntimeException(e);

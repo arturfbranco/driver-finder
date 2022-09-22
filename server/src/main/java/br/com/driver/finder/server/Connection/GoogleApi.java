@@ -1,4 +1,4 @@
-package br.com.driver.finder.server.Service;
+package br.com.driver.finder.server.Connection;
 
 import br.com.driver.finder.server.Connection.HttpConnection;
 import br.com.driver.finder.server.Util.Constants;
@@ -12,7 +12,7 @@ import java.nio.charset.StandardCharsets;
 public class GoogleApi{
 
     private final String GOOGLE_API_KEY;
-    GoogleApi() throws IOException {
+    public GoogleApi() throws IOException {
         this.GOOGLE_API_KEY = PropertiesReader.instance().getGoogleApiKey();
     }
 

@@ -13,7 +13,7 @@ public class GoogleApi{
 
     private final String GOOGLE_API_KEY;
     GoogleApi() throws IOException {
-        this.GOOGLE_API_KEY = new PropertiesReader().getProperties().getProperty("google-api-key");
+        this.GOOGLE_API_KEY = PropertiesReader.instance().getGoogleApiKey();
     }
 
     public JSONObject getGeolocation() throws IOException, InterruptedException {

@@ -1,6 +1,7 @@
 package br.com.driver.finder.server.Service;
 
 import br.com.driver.finder.server.Util.Constants;
+import br.com.driver.finder.server.Util.JsonParserSerializer;
 import org.json.JSONObject;
 
 public class Router {
@@ -18,7 +19,7 @@ public class Router {
     }
     public JSONObject callService(JSONObject request){
         if(request.getString("status").equals("400")){
-            return request;
+            return JsonParserSerializer.getJsonStatus400();
         }
         return this.routeRequest(request);
     }
@@ -33,9 +34,7 @@ public class Router {
             case Constants.END_RIDE_ROUTE:
                 return this.finalizerService.finalizeRide(jsonObject);
             default:
-                JSONObject errorJson = new JSONObject();
-                errorJson.put("status", "400");
-                return errorJson;
+                return JsonParserSerializer.getJsonStatus400();
         }
     }
 }

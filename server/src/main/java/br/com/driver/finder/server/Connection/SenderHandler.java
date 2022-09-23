@@ -23,9 +23,7 @@ public class SenderHandler {
             );
             return new JSONObject(serializedResponse);
         }catch (Exception e){
-            JSONObject jsonObject = new JSONObject();
-            jsonObject.put("status", "400");
-            return jsonObject;
+            return JsonParserSerializer.getJsonStatus400();
         }
 
     }

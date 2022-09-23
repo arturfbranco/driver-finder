@@ -5,7 +5,7 @@ public class ClientEntity {
     private Integer id;
     private String name;
     private String clientIp;
-    private String clientReceiverPort;
+    private Integer clientReceiverPort;
     private Double latitude;
     private Double longitude;
     private String address;
@@ -28,19 +28,19 @@ public class ClientEntity {
         this.name = name;
     }
 
-    public String getIp() {
+    public String getClientIp() {
         return clientIp;
     }
 
-    public void setIp(String ip) {
-        this.clientIp = ip;
+    public void setClientIp(String clientIp) {
+        this.clientIp = clientIp;
     }
 
-    public String getClientReceiverPort() {
+    public Integer getClientReceiverPort() {
         return clientReceiverPort;
     }
 
-    public void setClientReceiverPort(String clientReceiverPort) {
+    public void setClientReceiverPort(Integer clientReceiverPort) {
         this.clientReceiverPort = clientReceiverPort;
     }
 

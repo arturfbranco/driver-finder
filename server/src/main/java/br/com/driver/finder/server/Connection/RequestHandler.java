@@ -26,11 +26,17 @@ public class RequestHandler implements Runnable{
 
             String request = inputBufferedReader.readLine();
             JSONObject jsonRequest = JsonParserSerializer.parseString(request);
+            jsonRequest.put("clientIp", this.getClientIp());
             JSONObject jsonResponse = this.router.callService(jsonRequest);
             outputStream.writeBytes(JsonParserSerializer.serializeJson(jsonResponse));
             this.socket.close();
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
-    }//registrerDriver
+    }
+
+    private String getClientIp(){
+        String fullIp = this.socket.getRemoteSocketAddress().toString();
+        return fullIp.substring(1, fullIp.indexOf(':'));
+    }
 }

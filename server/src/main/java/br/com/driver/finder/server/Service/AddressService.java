@@ -1,6 +1,7 @@
 package br.com.driver.finder.server.Service;
 
 import br.com.driver.finder.server.Connection.Http.GoogleApi;
+import br.com.driver.finder.server.Util.JsonParserSerializer;
 import org.json.JSONObject;
 
 import java.io.IOException;
@@ -17,15 +18,15 @@ public class AddressService {
     }
 
     public JSONObject buildAddress(String address){
-        JSONObject jsonResponse = new JSONObject();
         try{
+            JSONObject jsonResponse = new JSONObject();
             JSONObject originalAddress = this.getEnrichedAddress(address);
             jsonResponse.put("address", this.reduceAddress(originalAddress));
             jsonResponse.put("status", "200");
+            return jsonResponse;
         }catch (Exception e) {
-            jsonResponse.put("status", "500");
+            return JsonParserSerializer.getJsonStatus500();
         }
-        return jsonResponse;
     }
     private JSONObject getEnrichedAddress(String address) throws IOException, InterruptedException {
         return address.isEmpty()

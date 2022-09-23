@@ -1,19 +1,16 @@
 package br.com.driver.finder.server.InMemoryDataBase;
 
-public class DriverEntity {
+public class ClientEntity {
 
     private Integer id;
     private String name;
-    private String ip;
+    private String clientIp;
     private String clientReceiverPort;
     private Double latitude;
     private Double longitude;
     private String address;
-    private DriverStatus status;
-
-    public DriverEntity(){
-        this.status = DriverStatus.AVAILABLE;
-    }
+    private ClientType clientType;
+    private ClientStatus status;
 
     public Integer getId() {
         return id;
@@ -32,11 +29,11 @@ public class DriverEntity {
     }
 
     public String getIp() {
-        return ip;
+        return clientIp;
     }
 
     public void setIp(String ip) {
-        this.ip = ip;
+        this.clientIp = ip;
     }
 
     public String getClientReceiverPort() {
@@ -71,11 +68,19 @@ public class DriverEntity {
         this.address = address;
     }
 
-    public DriverStatus getStatus() {
+    public ClientType getClientType() {
+        return clientType;
+    }
+
+    public void setClientType(ClientType clientType) {
+        this.clientType = clientType;
+    }
+
+    public ClientStatus getStatus() {
         return status;
     }
 
-    public void setStatus(DriverStatus status) {
+    public void setStatus(ClientStatus status) {
         this.status = status;
     }
 }

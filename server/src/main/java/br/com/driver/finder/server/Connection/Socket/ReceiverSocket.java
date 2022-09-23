@@ -1,5 +1,6 @@
-package br.com.driver.finder.server.Connection;
+package br.com.driver.finder.server.Connection.Socket;
 
+import br.com.driver.finder.server.Connection.RequestHandler;
 import br.com.driver.finder.server.Util.PropertiesReader;
 
 import java.io.IOException;

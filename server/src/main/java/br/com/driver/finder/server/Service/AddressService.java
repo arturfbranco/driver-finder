@@ -1,6 +1,6 @@
 package br.com.driver.finder.server.Service;
 
-import br.com.driver.finder.server.Connection.GoogleApi;
+import br.com.driver.finder.server.Connection.Http.GoogleApi;
 import org.json.JSONObject;
 
 import java.io.IOException;

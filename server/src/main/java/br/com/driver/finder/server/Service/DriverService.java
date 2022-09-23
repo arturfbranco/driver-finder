@@ -38,7 +38,7 @@ public class DriverService {
 
         ClientEntity clientEntity = new ClientEntity();
         clientEntity.setName(data.getString("name"));
-        clientEntity.setClientIp(data.getString("clientIp"));
+        clientEntity.setClientIp(jsonRequest.getString("clientIp"));
         clientEntity.setClientReceiverPort(data.getInt("port"));
         clientEntity.setLatitude(address.getDouble("latitude"));
         clientEntity.setLongitude(address.getDouble("longitude"));

@@ -3,26 +3,26 @@ package br.com.driver.finder.server.InMemoryDataBase;
 import java.util.HashMap;
 import java.util.Map;
 
-public class Database {
-    private static Database database;
+public class ClientDatabase {
+    private static ClientDatabase clientDatabase;
 
     private int driverCounter;
     private int passengerCounter;
     private final Map<Integer, ClientEntity> drivers;
     private final Map<Integer, ClientEntity> passengers;
 
-    private Database(){
+    private ClientDatabase(){
         this.driverCounter = 0;
         this.passengerCounter = 0;
         this.drivers = new HashMap<>();
         this.passengers = new HashMap<>();
     }
 
-    public static Database instance(){
-        if(Database.database == null){
-            Database.database = new Database();
+    public static ClientDatabase instance(){
+        if(ClientDatabase.clientDatabase == null){
+            ClientDatabase.clientDatabase = new ClientDatabase();
         }
-        return Database.database;
+        return ClientDatabase.clientDatabase;
     }
 
     public ClientEntity saveDriver(ClientEntity driver){
@@ -33,6 +33,7 @@ public class Database {
         this.driverCounter++;
         return driver;
     }
+
     public ClientEntity savePassenger(ClientEntity passenger){
         passenger.setId(this.passengerCounter);
         passenger.setClientType(ClientType.PASSENGER);
@@ -55,5 +56,10 @@ public class Database {
     }
     public ClientEntity deleteDriverById(Integer id){
         return this.drivers.remove(id);
+    }
+
+    public ClientEntity updateDriver(ClientEntity driver){
+        Integer id = driver.getId();
+        return this.drivers.replace(id, driver);
     }
 }

@@ -1,0 +1,114 @@
+{
+  "clientToServer": {
+
+    "registerDriver": {
+
+      "request": {
+        "route": "registerDriver",
+        "port": "PORTA QUE CLIENTE VAI OUVIR",
+        "name": "NOME DO MOTORISTA",
+        "address": "ENDEREÇO OU STRING VAZIA"
+      },
+
+      "response": {
+        "status": " '200'(Sucesso), '400'(Request incorreta), '500'(Erro no servidor) ",
+        "driverId": "ID ÚNICO GERADO NO SERVIDOR",
+        "driverName": "NOME DO MOTORISTA",
+        "driverAddress": "ENDEREÇO COMPLETO DO MOTORISTA"
+      }
+    },
+
+    "findDriver": {
+      "request": {
+        "route": "findDriver",
+        "port": "PORTA QUE CLIENTE VAI OUVIR",
+        "name": "NOME DO PASSAGEIRO",
+        "address": "ENDEREÇO OU STRING VAZIA"
+      },
+
+      "response": {
+        "status": " '200'(Sucesso), '400'(Request incorreta), '500'(Erro no servidor) ",
+        "driverId": "ID ÚNICO GERADO NO SERVIDOR",
+        "driverName": "NOME DO MOTORISTA",
+        "driverAddress": "ENDEREÇO COMPLETO DO MOTORISTA",
+        "passengerId": "ID ÚNICO GERADO NO SERVIDOR",
+        "passengerName": "NOME DO PASSAGEIRO",
+        "passengerAddress": "ENDEREÇO COMPLETO DO PASSAGEIRO"
+      }
+    },
+
+    "sendMessage": {
+      "request": {
+        "route": "sendMessage",
+        "senderType": "driver ou passenger",
+        "from": "ID DE QUEM ENVIA A MENSAGEM",
+        "to": "ID DE QUEM RECEBE A MENSAGEM"
+      },
+
+      "response": {
+        "status": " '200'(Sucesso), '400'(Request incorreta), '500'(Erro no servidor) "
+      }
+    },
+
+    "finalizeRide":{
+      "request": {
+        "route": "finalizeRide",
+        "idDriver": "ID DO MOTORISTA",
+        "idPassenger": "ID DO PASSAGEIRO"
+      },
+
+      "response": {
+        "status": " '200'(Sucesso), '400'(Request incorreta), '500'(Erro no servidor) "
+      }
+    }
+  },
+
+  "serverToClient": {
+
+    "passengerConnection": {
+
+      "request": {
+        "route": "passengerConnection",
+        "clientIp": "IP DO CLIENTE (USO INTERNO DO SERVIDOR)",
+        "clientReceiverPort": "PORTA DO CLIENTE (USO INTERNO DO SERVIDOR)",
+        "passengerId": "ID DO PASSAGEIRO",
+        "passengerName": "NOME DO PASSAGEIRO",
+        "passengerAddress": "ENDEREÇO DO PASSAGEIRO"
+      },
+
+      "expectedResponse": {
+        "status": " '200'(Sucesso), '400'(Request incorreta), '500'(Erro no servidor) "
+      }
+    },
+
+    "receiveMessage": {
+
+      "request": {
+
+        "route": "passengerConnection",
+        "clientIp": "IP DO CLIENTE (USO INTERNO DO SERVIDOR)",
+        "clientReceiverPort": "PORTA DO CLIENTE (USO INTERNO DO SERVIDOR)",
+        "from": "NOME DE QUEM ENVIOU",
+        "message": "MENSAGEM"
+      },
+
+      "expectedResponse": {
+
+        "status": " '200'(Sucesso), '400'(Request incorreta), '500'(Erro no servidor) "
+      }
+    },
+
+    "rideFinished": {
+
+      "request": {
+
+        "route": "rideFinished"
+      },
+
+      "expectedResponse": {
+
+        "status": " '200'(Sucesso), '400'(Request incorreta), '500'(Erro no servidor) "
+      }
+    }
+  }
+}

@@ -2,14 +2,14 @@ package br.com.driver.finder.server.Connection;
 
 import br.com.driver.finder.server.Connection.Socket.SenderSocket;
 import br.com.driver.finder.server.Util.JsonParserSerializer;
+
 import org.json.JSONObject;
 
-import java.net.Socket;
 
 public class SenderHandler {
     private final SenderSocket senderSocket;
 
-    public SenderHandler(Socket socket){
+    public SenderHandler(){
         this.senderSocket = new SenderSocket();
     }
 

@@ -18,12 +18,18 @@ public class Router {
         this.finalizerService = new FinalizerService();
     }
     public JSONObject callService(JSONObject request){
-        if(request.getString("status").equals("400")){
+        try {
+            if(request.getString("status").equals("200")){
+                return this.routeRequest(request);
+            }
             return JsonParserSerializer.getJsonStatus400();
+        } catch (Exception e) {
+            JSONObject errorObject = JsonParserSerializer.getJsonStatus500();
+            errorObject.put("message", e.getMessage());
+            return errorObject;
         }
-        return this.routeRequest(request);
     }
-    private JSONObject routeRequest(JSONObject jsonObject){
+    private JSONObject routeRequest(JSONObject jsonObject) throws Exception {
         switch (jsonObject.getString("route")){
             case Constants.REGISTER_DRIVER_ROUTE:
                 return this.driverService.registerDriver(jsonObject);

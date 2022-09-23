@@ -2,33 +2,47 @@ package br.com.driver.finder.server.Service;
 
 import br.com.driver.finder.server.Exception.AddressNotFoundException;
 import br.com.driver.finder.server.InMemoryDataBase.ClientEntity;
-import br.com.driver.finder.server.InMemoryDataBase.Database;
+import br.com.driver.finder.server.InMemoryDataBase.ClientDatabase;
+import br.com.driver.finder.server.InMemoryDataBase.ClientStatus;
 import br.com.driver.finder.server.Util.JsonParserSerializer;
 import org.json.JSONObject;
 
 public class DriverService {
-
-    private final AddressService addressService;
-    private final Database database;
+    private final ClientDatabase clientDatabase;
 
     public DriverService(){
-        this.addressService = new AddressService();
-        this.database = Database.instance();
+        this.clientDatabase = ClientDatabase.instance();
     }
 
-    public JSONObject registerDriver( JSONObject driver ){
+    public JSONObject registerDriver( JSONObject driver ) throws AddressNotFoundException {
         try {
-            ClientEntity savedDriver = this.database.saveDriver( new ClientEntity( driver ) );
-            JSONObject jsonResponse = new JSONObject(savedDriver);
-            jsonResponse.put("status", "200");
-            return jsonResponse;
+            ClientEntity savedDriver = this.clientDatabase.saveDriver( new ClientEntity( driver ) );
+            return this.buildResponse(savedDriver);
         }catch ( AddressNotFoundException e ){
-            JSONObject notFound = JsonParserSerializer.getJsonStatus500();
-            notFound.put("message", e.getMessage());
-            return notFound;
+            throw e;
         }catch ( Exception e ){
             return JsonParserSerializer.getJsonStatus500();
         }
+    }
 
+    private JSONObject buildResponse(ClientEntity driver){
+        JSONObject response = new JSONObject();
+        response.put("status", "200");
+        response.put("driverId", driver.getId());
+        response.put("driverName", driver.getName());
+        response.put("driverAddress", driver.getAddress());
+        return response;
+    }
+
+    public void setToInRide(ClientEntity driver){
+        this.updateDriverStatus(driver, ClientStatus.IN_RIDE);
+    }
+    public void setToAvailable(ClientEntity driver){
+        this.updateDriverStatus(driver, ClientStatus.AVAILABLE);
+    }
+
+    private void updateDriverStatus(ClientEntity driver, ClientStatus status){
+        driver.setStatus(status);
+        ClientDatabase.instance().updateDriver(driver);
     }
 }

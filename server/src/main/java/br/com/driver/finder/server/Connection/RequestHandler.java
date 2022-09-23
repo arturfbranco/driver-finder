@@ -23,7 +23,6 @@ public class RequestHandler implements Runnable{
         try {
             BufferedReader inputBufferedReader = new BufferedReader(new InputStreamReader(this.socket.getInputStream()));
             DataOutputStream outputStream = new DataOutputStream(this.socket.getOutputStream());
-
             String request = inputBufferedReader.readLine();
             JSONObject jsonRequest = JsonParserSerializer.parseString(request);
             jsonRequest.put("clientIp", this.getClientIp());

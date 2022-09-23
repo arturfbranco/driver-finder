@@ -1,5 +1,9 @@
 package br.com.driver.finder.server.InMemoryDataBase;
 
+import br.com.driver.finder.server.Exception.AddressNotFoundException;
+import br.com.driver.finder.server.Util.Util;
+import org.json.JSONObject;
+
 public class ClientEntity {
 
     private Integer id;
@@ -11,6 +15,17 @@ public class ClientEntity {
     private String address;
     private ClientType clientType;
     private ClientStatus status;
+
+    public ClientEntity(JSONObject json) throws AddressNotFoundException {
+        JSONObject address = Util.getAddress(json.getString("address"));
+        this.name = json.getString("name");
+        this.clientIp = json.getString("clientIp");
+        this.clientReceiverPort = json.getInt("port");
+        this.latitude = address.getDouble("latitude");
+        this.longitude = address.getDouble("longitude");
+        this.address = address.getString("formattedAddress");
+    }
+    public ClientEntity(){};
 
     public Integer getId() {
         return id;

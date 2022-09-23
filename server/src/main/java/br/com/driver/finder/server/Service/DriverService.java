@@ -16,42 +16,19 @@ public class DriverService {
         this.database = Database.instance();
     }
 
-    public JSONObject registerDriver(JSONObject driver){
+    public JSONObject registerDriver( JSONObject driver ){
         try {
-            ClientEntity clientEntity = this.buildClientEntity(driver);
-            ClientEntity savedDriver = this.database.saveDriver(clientEntity);
+            ClientEntity savedDriver = this.database.saveDriver( new ClientEntity( driver ) );
             JSONObject jsonResponse = new JSONObject(savedDriver);
             jsonResponse.put("status", "200");
             return jsonResponse;
-        }catch (AddressNotFoundException e){
+        }catch ( AddressNotFoundException e ){
             JSONObject notFound = JsonParserSerializer.getJsonStatus500();
             notFound.put("message", e.getMessage());
             return notFound;
-        }catch (Exception e){
+        }catch ( Exception e ){
             return JsonParserSerializer.getJsonStatus500();
         }
 
-    }
-    private ClientEntity buildClientEntity(JSONObject jsonRequest) throws AddressNotFoundException {
-        JSONObject data = jsonRequest.getJSONObject("data");
-        JSONObject address = this.getAddress(data.getString("address"));
-
-        ClientEntity clientEntity = new ClientEntity();
-        clientEntity.setName(data.getString("name"));
-        clientEntity.setClientIp(jsonRequest.getString("clientIp"));
-        clientEntity.setClientReceiverPort(data.getInt("port"));
-        clientEntity.setLatitude(address.getDouble("latitude"));
-        clientEntity.setLongitude(address.getDouble("longitude"));
-        clientEntity.setAddress(address.getString("formattedAddress"));
-        return clientEntity;
-
-    }
-
-    private JSONObject getAddress(String address) throws AddressNotFoundException {
-        JSONObject addressServiceResponse = this.addressService.buildAddress(address);
-        if(addressServiceResponse.getString("status").equals("500")){
-            throw new AddressNotFoundException();
-        }
-        return addressServiceResponse.getJSONObject("address");
     }
 }

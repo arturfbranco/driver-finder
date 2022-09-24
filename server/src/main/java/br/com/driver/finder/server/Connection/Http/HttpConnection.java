@@ -1,4 +1,4 @@
-package br.com.driver.finder.server.Connection;
+package br.com.driver.finder.server.Connection.Http;
 
 import java.io.IOException;
 import java.net.URI;

@@ -1,5 +1,5 @@
 package br.com.driver.finder.server.InMemoryDataBase;
 
-public enum DriverStatus {
+public enum ClientStatus {
     AVAILABLE, IN_RIDE
 }

@@ -1,7 +1,16 @@
 package br.com.driver.finder.server;
 
+import br.com.driver.finder.server.Connection.Socket.ReceiverSocket;
+import java.io.IOException;
+
 public class Main {
     public static void main(String[] args) {
-        System.out.println("Hello world!");
+        try {
+            System.out.println("Starting server...");
+            ReceiverSocket.listen();
+        }catch (IOException e){
+            System.err.println("Internal server error!");
+        }
+
     }
 }

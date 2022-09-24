@@ -1,6 +1,5 @@
-package br.com.driver.finder.server.Connection;
+package br.com.driver.finder.server.Connection.Http;
 
-import br.com.driver.finder.server.Connection.HttpConnection;
 import br.com.driver.finder.server.Util.Constants;
 import br.com.driver.finder.server.Util.PropertiesReader;
 import org.json.JSONObject;

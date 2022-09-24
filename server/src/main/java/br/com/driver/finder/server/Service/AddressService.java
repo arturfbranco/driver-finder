@@ -18,6 +18,7 @@ public class AddressService {
     }
 
     public JSONObject buildAddress(String address){
+        System.out.println("Requesting address to Google API...");
         try{
             JSONObject jsonResponse = new JSONObject();
             JSONObject originalAddress = this.getEnrichedAddress(address);
@@ -35,6 +36,7 @@ public class AddressService {
     }
 
     private JSONObject getFromGeolocation() throws IOException, InterruptedException {
+        System.out.println("No address provided. Tracking user by Geolocation...");
         JSONObject geolocation = this.googleApi.getGeolocation().getJSONObject("location");
         String coordinates = geolocation.get("lat") + "," + geolocation.get("lng");
         JSONObject response = this.googleApi.getFullAddress(coordinates, true);

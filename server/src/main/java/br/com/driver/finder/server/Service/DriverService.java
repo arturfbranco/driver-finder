@@ -17,10 +17,12 @@ public class DriverService {
     public JSONObject registerDriver( JSONObject driver ) throws AddressNotFoundException {
         try {
             ClientEntity savedDriver = this.clientDatabase.saveDriver( new ClientEntity( driver ) );
+            System.out.println("Driver registered with success:\n" + savedDriver.toString());
             return this.buildResponse(savedDriver);
         }catch ( AddressNotFoundException e ){
             throw e;
         }catch ( Exception e ){
+            System.out.println("Internal server error while registering driver.");
             return JsonParserSerializer.getJsonStatus500();
         }
     }

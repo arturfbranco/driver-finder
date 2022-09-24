@@ -21,6 +21,7 @@ public class RequestHandler implements Runnable{
     @Override
     public void run() {
         try {
+            System.out.println("Request received from: " + this.getClientIp() + ".");
             BufferedReader inputBufferedReader = new BufferedReader(new InputStreamReader(this.socket.getInputStream()));
             DataOutputStream outputStream = new DataOutputStream(this.socket.getOutputStream());
             String request = inputBufferedReader.readLine();
@@ -29,6 +30,7 @@ public class RequestHandler implements Runnable{
             JSONObject jsonResponse = this.router.callService(jsonRequest);
             outputStream.writeBytes(JsonParserSerializer.serializeJson(jsonResponse));
             this.socket.close();
+            System.out.println("Closing connection...\n\n\n");
         } catch (IOException e) {
             throw new RuntimeException(e);
         }

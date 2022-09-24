@@ -53,8 +53,9 @@
     "finalizeRide":{
       "request": {
         "route": "finalizeRide",
-        "idDriver": "ID DO MOTORISTA",
-        "idPassenger": "ID DO PASSAGEIRO"
+        "senderType": "driver ou passenger",
+        "from": "ID DE QUEM FINALIZOU",
+        "to": "ID DO OUTRO MOTORISTA / PASSAGEIRO"
       },
 
       "response": {
@@ -102,7 +103,9 @@
 
       "request": {
 
-        "route": "rideFinished"
+        "route": "rideFinished",
+        "clientIp": "IP DO CLIENTE (USO INTERNO DO SERVIDOR)",
+        "clientReceiverPort": "PORTA DO CLIENTE (USO INTERNO DO SERVIDOR)"
       },
 
       "expectedResponse": {

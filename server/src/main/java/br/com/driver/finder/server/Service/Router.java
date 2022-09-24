@@ -20,17 +20,21 @@ public class Router {
     public JSONObject callService(JSONObject request){
         try {
             if(request.getString("status").equals("200")){
+                System.out.println("Service called with success.");
                 return this.routeRequest(request);
             }
             return JsonParserSerializer.getJsonStatus400();
         } catch (Exception e) {
+            System.out.println("Internal server error: " + e.getMessage());
             JSONObject errorObject = JsonParserSerializer.getJsonStatus500();
             errorObject.put("message", e.getMessage());
             return errorObject;
         }
     }
     private JSONObject routeRequest(JSONObject jsonObject) throws Exception {
-        switch (jsonObject.getString("route")){
+        String route = jsonObject.getString("route");
+        System.out.println("Routing request to: " + route);
+        switch (route){
             case Constants.REGISTER_DRIVER_ROUTE:
                 return this.driverService.registerDriver(jsonObject);
             case Constants.FIND_DRIVER_ROUTE:
@@ -40,6 +44,7 @@ public class Router {
             case Constants.END_RIDE_ROUTE:
                 return this.finalizerService.finalizeRide(jsonObject);
             default:
+                System.out.println("Requested route does not exist.");
                 return JsonParserSerializer.getJsonStatus400();
         }
     }

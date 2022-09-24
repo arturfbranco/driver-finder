@@ -9,11 +9,12 @@ import java.net.Socket;
 
 public class ReceiverSocket {
 
-    public static void main(String[] args) throws IOException {
+    public static void listen() throws IOException {
 
         Integer port = PropertiesReader.instance().getReceiverPort();
         ServerSocket serverSocket = new ServerSocket(port);
 
+        System.out.println("The server started with success.\nListening on port " + port + "...");
         while (true){
             Socket socket = serverSocket.accept();
             RequestHandler requestHandler = new RequestHandler(socket);

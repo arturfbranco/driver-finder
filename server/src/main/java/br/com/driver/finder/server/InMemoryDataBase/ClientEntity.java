@@ -25,7 +25,7 @@ public class ClientEntity {
         this.longitude = address.getDouble("longitude");
         this.address = address.getString("formattedAddress");
     }
-    public ClientEntity(){};
+    public ClientEntity(){}
 
     public Integer getId() {
         return id;
@@ -97,5 +97,18 @@ public class ClientEntity {
 
     public void setStatus(ClientStatus status) {
         this.status = status;
+    }
+
+    @Override
+    public String toString() {
+        return "id=" + id +
+                "\n name='" + name + '\'' +
+                "\n clientIp='" + clientIp + '\'' +
+                "\n clientReceiverPort=" + clientReceiverPort +
+                "\n latitude=" + latitude +
+                "\n longitude=" + longitude +
+                "\n address='" + address + '\'' +
+                "\n clientType=" + clientType +
+                "\n status=" + status;
     }
 }

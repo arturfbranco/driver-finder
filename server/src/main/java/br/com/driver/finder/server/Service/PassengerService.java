@@ -25,13 +25,17 @@ public class PassengerService {
     public JSONObject findDriver(JSONObject jsonRequest) throws NoDriverFound, AddressNotFoundException {
         try {
             ClientEntity passenger = new ClientEntity(jsonRequest);
+            System.out.println("Searching closest available driver for: " + passenger);
             ClientEntity closestDriver = this.getAvailableClosestDriver(passenger.getLatitude(), passenger.getLongitude());
             ClientEntity savedPassenger = ClientDatabase.instance().savePassenger(passenger);
+            System.out.println("Driver found: " + closestDriver + "\nTrying to establish connection...");
             JSONObject connectionResponse = this.connectPassengerToDriver(savedPassenger, closestDriver);
             if(connectionResponse.get("status").equals("200")){
                 this.driverService.setToInRide(closestDriver);
+                System.out.println("Connection established between driver and passenger.");
                 return connectionResponse;
             }else{
+                System.out.println("Driver unreachable. Looking for another one...");
                 ClientDatabase.instance().deleteDriverById(closestDriver.getId());
                 return this.findDriver(jsonRequest);
             }
@@ -111,4 +115,5 @@ public class PassengerService {
     private Double radianToDegree(Double radian){
         return radian * 180.0 / Math.PI;
     }
+
 }

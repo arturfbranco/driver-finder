@@ -42,7 +42,8 @@
         "route": "sendMessage",
         "senderType": "driver ou passenger",
         "from": "ID DE QUEM ENVIA A MENSAGEM",
-        "to": "ID DE QUEM RECEBE A MENSAGEM"
+        "to": "ID DE QUEM RECEBE A MENSAGEM",
+        "message": "MENSAGEM"
       },
 
       "response": {
@@ -52,7 +53,7 @@
 
     "finalizeRide":{
       "request": {
-        "route": "finalizeRide",
+        "route": "endRide",
         "senderType": "driver ou passenger",
         "from": "ID DE QUEM FINALIZOU",
         "to": "ID DO OUTRO MOTORISTA / PASSAGEIRO"

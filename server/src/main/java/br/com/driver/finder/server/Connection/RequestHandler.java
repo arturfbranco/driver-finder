@@ -25,12 +25,12 @@ public class RequestHandler implements Runnable{
             BufferedReader inputBufferedReader = new BufferedReader(new InputStreamReader(this.socket.getInputStream()));
             DataOutputStream outputStream = new DataOutputStream(this.socket.getOutputStream());
             String request = inputBufferedReader.readLine();
-            JSONObject jsonRequest = JsonParserSerializer.parseString(request);
+            JSONObject jsonRequest = JsonParserSerializer.parseString(request, false);
             jsonRequest.put("clientIp", this.getClientIp());
             JSONObject jsonResponse = this.router.callService(jsonRequest);
             outputStream.writeBytes(JsonParserSerializer.serializeJson(jsonResponse));
             this.socket.close();
-            System.out.println("Closing connection...\n\n\n");
+            System.out.println("Closing connection...\n\n");
         } catch (IOException e) {
             throw new RuntimeException(e);
         }

@@ -22,7 +22,7 @@ public class SenderHandler {
                     jsonRequest.getInt("clientReceiverPort")
             );
             System.out.println("Request sent to IP " + jsonRequest.getString("clientIp") + " on port " + jsonRequest.getInt("clientReceiverPort") + ".");
-            return JsonParserSerializer.parseString(serializedResponse);
+            return JsonParserSerializer.parseString(serializedResponse, true);
         }catch (Exception e){
             return JsonParserSerializer.getJsonStatus400();
         }

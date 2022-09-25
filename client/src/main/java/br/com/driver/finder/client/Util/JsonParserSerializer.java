@@ -1,17 +1,18 @@
-package br.com.driver.finder.server.Util;
+package br.com.driver.finder.client.Util;
 
 import org.json.JSONObject;
 
 public class JsonParserSerializer {
+
     public static JSONObject parseString(String string, boolean verifyStatus){
         JSONObject json;
         try {
             json = new JSONObject(string);
             if(verifyStatus){
-                if(json.getString("status").equals("200")){
+                if(json.getString("status").equals("200") || json.getString("status").equals("404")){
                     return json;
                 }else{
-                    return JsonParserSerializer.getJsonStatus400();
+                    return JsonParserSerializer.getJsonStatus500();
                 }
             }
             json.put("status", "200");
@@ -35,5 +36,4 @@ public class JsonParserSerializer {
         json500.put("status", "500");
         return json500;
     }
-
 }

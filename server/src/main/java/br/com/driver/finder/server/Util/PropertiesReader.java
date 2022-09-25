@@ -20,13 +20,8 @@ public class PropertiesReader {
     }
 
     private void setProperties() throws IOException {
-        String configPropertiesPath = Objects.requireNonNull(Thread
-                        .currentThread()
-                        .getContextClassLoader()
-                        .getResource("config.properties"))
-                .getPath();
         Properties properties = new Properties();
-        InputStream input = new FileInputStream(configPropertiesPath);
+        InputStream input = this.getClass().getResourceAsStream("/config.properties");
         properties.load(input);
         this.properties = properties;
     }

@@ -1,5 +1,7 @@
 package br.com.driver.finder.server.Service;
 
+import br.com.driver.finder.server.Exception.AddressNotFoundException;
+import br.com.driver.finder.server.Exception.NoDriverFound;
 import br.com.driver.finder.server.Util.Constants;
 import br.com.driver.finder.server.Util.JsonParserSerializer;
 import org.json.JSONObject;
@@ -19,16 +21,21 @@ public class Router {
     }
     public JSONObject callService(JSONObject request){
         try {
-            if(request.getString("status").equals("200")){
+            if(request.optString("status").equals("200")){
                 System.out.println("Service called with success.");
                 return this.routeRequest(request);
             }
             return JsonParserSerializer.getJsonStatus400();
-        } catch (Exception e) {
-            System.out.println("Internal server error: " + e.getMessage());
-            JSONObject errorObject = JsonParserSerializer.getJsonStatus500();
+        }catch (NoDriverFound | AddressNotFoundException e){
+            System.out.println("Not found.");
+            JSONObject errorObject = new JSONObject();
+            errorObject.put("status", "404");
             errorObject.put("message", e.getMessage());
             return errorObject;
+        }
+        catch (Exception e) {
+            System.out.println("Internal server error: " + e.getMessage());
+            return JsonParserSerializer.getJsonStatus500();
         }
     }
     private JSONObject routeRequest(JSONObject jsonObject) throws Exception {

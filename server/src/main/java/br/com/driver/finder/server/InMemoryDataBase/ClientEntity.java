@@ -102,13 +102,13 @@ public class ClientEntity {
     @Override
     public String toString() {
         return "id=" + id +
-                "\n name='" + name + '\'' +
-                "\n clientIp='" + clientIp + '\'' +
-                "\n clientReceiverPort=" + clientReceiverPort +
-                "\n latitude=" + latitude +
-                "\n longitude=" + longitude +
-                "\n address='" + address + '\'' +
-                "\n clientType=" + clientType +
-                "\n status=" + status;
+                "\nname='" + name + '\'' +
+                "\nclientIp='" + clientIp + '\'' +
+                "\nclientReceiverPort=" + clientReceiverPort +
+                "\nlatitude=" + latitude +
+                "\nlongitude=" + longitude +
+                "\naddress='" + address + '\'' +
+                "\nclientType=" + clientType +
+                "\nstatus=" + status;
     }
 }

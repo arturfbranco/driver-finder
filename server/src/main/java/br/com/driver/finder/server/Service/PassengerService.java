@@ -25,7 +25,7 @@ public class PassengerService {
     public JSONObject findDriver(JSONObject jsonRequest) throws NoDriverFound, AddressNotFoundException {
         try {
             ClientEntity passenger = new ClientEntity(jsonRequest);
-            System.out.println("Searching closest available driver for: " + passenger);
+            System.out.println("Searching closest available driver for address: " + passenger.getAddress());
             ClientEntity closestDriver = this.getAvailableClosestDriver(passenger.getLatitude(), passenger.getLongitude());
             ClientEntity savedPassenger = ClientDatabase.instance().savePassenger(passenger);
             System.out.println("Driver found: " + closestDriver + "\nTrying to establish connection...");

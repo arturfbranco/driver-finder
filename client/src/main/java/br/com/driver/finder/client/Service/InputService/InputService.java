@@ -14,6 +14,7 @@ public class InputService {
             System.out.println("Name: " + request.getString("passengerName"));
             System.out.println("Address: " + request.getString("passengerAddress"));
             GlobalVariables.connectedUserId = request.getInt("passengerId");
+            System.out.println("A chat channel was opened between you and " + request.getString("passengerName"));
             JSONObject response = new JSONObject();
             response.put("status", "200");
             return response;
@@ -47,6 +48,7 @@ public class InputService {
                 ReceiverSocket.stopListening();
                 GlobalVariables.userId = null;
                 System.out.println("Register again to request for another ride.");
+                System.out.println("Please, type enter to leave the session...");
             }
             JSONObject response = new JSONObject();
             response.put("status", "200");

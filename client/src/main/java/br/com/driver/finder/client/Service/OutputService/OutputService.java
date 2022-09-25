@@ -2,7 +2,6 @@ package br.com.driver.finder.client.Service.OutputService;
 
 import br.com.driver.finder.client.Connection.OutputHandler;
 import br.com.driver.finder.client.Connection.ReceiverSocket;
-import br.com.driver.finder.client.Connection.SenderSocket;
 import br.com.driver.finder.client.GlobalVariables;
 import br.com.driver.finder.client.Util.ClientType;
 import org.json.JSONObject;
@@ -91,8 +90,7 @@ public class OutputService {
             if(GlobalVariables.clientType.equals(ClientType.DRIVER)){
                 System.out.println("Waiting for a new passenger to connect...");
             } else {
-                ReceiverSocket.stopListening();
-                GlobalVariables.userId = null;
+                this.removeUser();
                 System.out.println("Register again to request for another ride.");
             }
             return true;
@@ -100,6 +98,11 @@ public class OutputService {
             System.out.println("It was not possible to finish the ride. Try again.");
             return false;
         }
+    }
+
+    public void removeUser(){
+        GlobalVariables.userId = null;
+        ReceiverSocket.stopListening();
     }
 
     private JSONObject genericClientRequest(String name, String address){

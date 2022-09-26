@@ -47,7 +47,7 @@ public class OutputService {
             GlobalVariables.userId = response.getInt("passengerId");
             GlobalVariables.clientType = ClientType.PASSENGER;
             GlobalVariables.connectedUserId = response.getInt("driverId");
-            System.out.println("Driver is one its way to get "
+            System.out.println("Driver is on its way to get "
                     + response.getString("passengerName")
                     + " at " + response.getString("passengerAddress") + ".");
             ReceiverSocket.startListening();

@@ -14,13 +14,13 @@ public class DriverFinderCli {
         this.outputService = new OutputService();
     }
 
-    public void lauch(){
+    public void launch(){
         try {
             this.settings();
             this.mainMenu();
         }catch (Exception e){
             System.out.println("Something unexpected happened! Lets try again...");
-            this.lauch();
+            this.launch();
         }
     }
 

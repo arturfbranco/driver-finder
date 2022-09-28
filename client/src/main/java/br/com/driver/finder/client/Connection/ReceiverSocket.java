@@ -19,7 +19,12 @@ public class ReceiverSocket implements Runnable {
 
     public static void startListening(){
         GlobalVariables.shouldListen = true;
-        new Thread(new ReceiverSocket()).start();
+        if(GlobalVariables.listener == null){
+            GlobalVariables.listener = new Thread(new ReceiverSocket());
+        }
+        if(!GlobalVariables.listener.isAlive()){
+            GlobalVariables.listener.start();
+        }
     }
     public static void stopListening(){
         GlobalVariables.shouldListen = false;

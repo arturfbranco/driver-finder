@@ -9,5 +9,7 @@ public class GlobalVariables {
     public static Integer userId = null;
     public static ClientType clientType = null;
     public static Integer connectedUserId = null;
+
+    public static Thread listener;
     public static Boolean shouldListen = null;
 }

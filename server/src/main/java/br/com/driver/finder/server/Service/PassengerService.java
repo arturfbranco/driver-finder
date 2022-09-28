@@ -53,8 +53,7 @@ public class PassengerService {
         if(responseStatus.equals("200")){
             return this.buildResponseToPassenger(passenger, driver);
         }
-        throw new Exception();
-
+        return JsonParserSerializer.getJsonStatus500();
     }
 
     private JSONObject buildResponseToPassenger(ClientEntity passenger, ClientEntity driver){
